@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Anime Wallpaper Redirect</title>
+    <script>
+      async function getWallpaper() {
+        try {
+          // Call Wallhaven API for random anime wallpaper
+          const res = await fetch("https://wallhaven.cc/api/v1/search?q=anime&atleast=1920x1080&sorting=random");
+          const data = await res.json();
+
+          // Pick a random wallpaper
+          const wall = data.data[Math.floor(Math.random() * data.data.length)];
+          const imgUrl = wall.path;
+
+          // Redirect browser (and Lively) straight to the image
+          window.location.href = imgUrl;
+        } catch (e) {
+          document.body.innerHTML = "Error fetching wallpaper 😢";
+        }
+      }
+      getWallpaper();
+    </script>
+  </head>
+  <body></body>
+</html>
